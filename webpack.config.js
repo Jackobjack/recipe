@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   entry: './src/js/index.js',
   plugins: [
     new HtmlWebpackPlugin({     // Also generate a test.html
@@ -10,11 +11,11 @@ module.exports = {
       })
   ],
   devServer: {
-    static: './dist',
+    static: './docs',
   },
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: 'js/main.js',
+    path: path.resolve(__dirname, 'docs'),
     clean: true,
   },
   module: {

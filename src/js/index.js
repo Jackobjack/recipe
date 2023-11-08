@@ -1,8 +1,15 @@
-const arr = [23, 45, 12];
-const arr2 = [...arr, 44, 1223];
+// require ("@babel/polyfill");
+// fetch(url); 
+import axios from 'axios';
+import Search from './model/search';
 
-let myFunc = a => {
-    console.log('too : ${a}');
-}
-myFunc(arr2[1]);
+// Класс обьет үүсгэв
+let search = new Search('pasta');
+
+// Түүн доторх функцийг дуудав
+search.doSearch().then(r => console.log(r));
+
+
+
+
 
