@@ -1,4 +1,4 @@
-// require ("@babel/polyfill");
+import { every } from 'lodash';
 import Search from './model/search';
 import {elements, renderLoader, clearLoader} from './view/base';
 import * as searchView from './view/searchView';
@@ -34,10 +34,6 @@ const controlSearch = async () => {
         } else {
             searchView.renderRecipes(state.search.result);
         }
-
-        // 6. Хайлтын талбарыг цэвэрлэх
-        
-        
     }
 }
 
@@ -45,6 +41,20 @@ elements.searchForum.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 })
+
+elements.pageButton.addEventListener('click', event => {
+    const btn = event.target.closest('.btn-inline')
+    if (btn){
+        // data-goto=${page}
+        const gotoPageNumber = parseInt(btn.dataset.goto, 10)
+        searchView.clearSearchResult();
+        searchView.renderRecipes(state.search.result, gotoPageNumber);
+    }
+})
+
+
+
+
 
 
 

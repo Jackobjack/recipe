@@ -1,6 +1,20 @@
 import {elements} from "./base";
 import { renderLoader } from "./base";
 
+// Вебээс хайлтын түлхүүр үгийг гаргаж авна
+export const getInput = () => elements.searchField.value;
+
+// Хайлтын талбарын түлхүүр үгийг арилгана 
+export const clearSearchQuery = () => {
+    elements.searchField.value = '';
+}
+
+// Хайлтын үр дүнгийн талбарыг цэвэрлэнэ
+export const clearSearchResult = () => {
+    elements.searchResultsList.innerHTML = '';
+    elements.pageButton.innerHTML = '';
+}
+
 // private function
 const renderRecipe = (recipe) => {
     let markup = 
@@ -20,25 +34,41 @@ const renderRecipe = (recipe) => {
     elements.searchResultsList.insertAdjacentHTML('beforeend', markup);
 }
 
-
-// Вебээс хайлтын түлхүүр үгийг гаргаж авна
-export const getInput = () => elements.searchField.value;
-
-// Хайлтын талбарын түлхүүр үгийг арилгана 
-export const clearSearchQuery = () => {
-    elements.searchField.value = '';
-}
-
-// Хайлтын үр дүнгийн талбарыг цэвэрлэнэ
-export const clearSearchResult = () => {
-    elements.searchResultsList.innerHTML = '';
-}
+const createButton = (page, type, direction) => (
+    `<button class="btn-inline results__btn--${type}" data-goto=${page}>
+        <svg class="search__icon">
+            <use href="img/icons.svg#icon-triangle-${direction}"></use>
+        </svg>
+        <span>Хуудас ${page}</span>
+    </button>`);
 
 // Хайлтын үр дүнг дэлгэц дээр харуулна
-export const renderRecipes = (recipes) => {
+export const renderRecipes = (recipes, currentPage = 1, resPerPage = 10) => {
+    const start = (currentPage - 1) * resPerPage;
+    const end = currentPage * resPerPage
+
+    // ceil = 4.2 => 5;     floor = 4.2 => 4 
+    const totalPages = Math.ceil(recipes.length / resPerPage);
+
     // recipes.forEach(recipe => renderRecipe(recipe))
-    recipes.forEach(renderRecipe);      
+    recipes.slice(start, end).forEach(renderRecipe);  
+    
+    // type = 'prev', 'next';
+    renderButtons(currentPage, totalPages);
 }
 
-
+const renderButtons = (currentPage, totalPages) => {
+    let buttonHtml;
+    if (totalPages === 1){
+        buttonHtml = '';
+    } else if (currentPage === 1 && totalPages > 1){
+        buttonHtml = createButton((currentPage + 1), 'next', 'right');
+    } else  if (currentPage < totalPages ){
+        buttonHtml = createButton((currentPage - 1), 'prev', 'left');
+        buttonHtml += createButton((currentPage + 1), 'next', 'right');
+    } else  if (currentPage === totalPages){
+        buttonHtml = createButton((currentPage - 1), 'prev', 'left');
+    }
+    elements.pageButton.insertAdjacentHTML('afterbegin', buttonHtml);
+}
 

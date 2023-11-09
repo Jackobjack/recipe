@@ -1,9 +1,11 @@
 export const elements = {
     searchForum : document.querySelector('.search'),
     searchField : document.querySelector('.search__field'),
-    searchResultsList : document.querySelector('.results__list'),
     searchResultDiv : document.querySelector('.results'),
-
+    searchResultsList : document.querySelector('.results__list'),
+    pageButton : document.querySelector('.results__pages'),
+    recipe : document.querySelector('.recipe')
+    
 }
 
 export const elementStrings = {
