@@ -1,5 +1,7 @@
 // require ("@babel/polyfill");
 import Search from './model/search';
+import {elements, renderLoader, clearLoader} from './view/base';
+import * as searchView from './view/searchView';
 
 /** Web app төлөв
 * - Хайлтын query, үр дүн
@@ -7,35 +9,39 @@ import Search from './model/search';
 * - Лайкалсан жорууд
 * - Захиалж байгаа жорын найрлагууд
 */
-const state = {};
+export const state = {};
 
 const controlSearch = async () => {
     // 1. Вебээс хайлтын түлхүүр үгийг гаргаж авна
-    const query = 'pizza';
-    // query = document.querySelector('.search__field').value
+    let query = searchView.getInput();
 
     // 2. Шинээр хайлтын обьектыг үүсгэж өгнө
     if (query){
         state.search = new Search(query);
         
         // 3. Хайлт хийхэд зориулж дэлгэцийн UI бэлтгэж өгнө.
-
+        searchView.clearSearchQuery();
+        searchView.clearSearchResult();
+        renderLoader(elements.searchResultDiv);
     
         // 4. Хайлтыг гүйцэтгэнэ
         await state.search.doSearch();
     
         // 5. Хайлтын үр дүнг гүйцэтгэнэ
-        console.log(state.search.result);
-        // const html = '';
-        // document.querySelector('.').classList.add('beforeend', html);  
+        clearLoader();
+        if (state.search.result === undefined){
+            // alert('Хайлтаар илэрсэнгүй');
+        } else {
+            searchView.renderRecipes(state.search.result);
+        }
+
+        // 6. Хайлтын талбарыг цэвэрлэх
+        
+        
     }
-    
-
-
-    
 }
 
-document.querySelector('.search').addEventListener('submit', e => {
+elements.searchForum.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 })
