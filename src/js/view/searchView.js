@@ -43,7 +43,7 @@ const createButton = (page, type, direction) => (
     </button>`);
 
 // Хайлтын үр дүнг дэлгэц дээр харуулна
-export const renderRecipes = (recipes, currentPage = 1, resPerPage = 10) => {
+export const renderRecipes = (recipes, currentPage = 1, resPerPage = 9) => {
     const start = (currentPage - 1) * resPerPage;
     const end = currentPage * resPerPage
 
