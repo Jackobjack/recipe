@@ -1,3 +1,0 @@
-            this.result = await axios('https://forkify-api.herokuapp.com/api/v2/recipes/' + recipes[1].id)
-            console.log(result);
-            let ingredients = result.data.data.recipe.ingredients

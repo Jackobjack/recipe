@@ -1,11 +1,13 @@
 export const elements = {
-    searchForum : document.querySelector('.search'),
+    searchForm : document.querySelector('.search'),
     searchField : document.querySelector('.search__field'),
     searchResultDiv : document.querySelector('.results'),
     searchResultsList : document.querySelector('.results__list'),
-    pageButton : document.querySelector('.results__pages'),
-    recipe : document.querySelector('.recipe')
-    
+    pageButtons : document.querySelector('.results__pages'),
+    recipeDiv : document.querySelector('.recipe'),
+    shoppingList : document.querySelector('.shopping__list'),
+    likesMenu : document.querySelector('.likes__field'),
+    likesList : document.querySelector('.likes__list'),
 }
 
 export const elementStrings = {

@@ -14,13 +14,23 @@ export default class Recipe {
             this.servings = result.data.data.recipe.servings;
             this.source_url = result.data.data.recipe.source_url;
             this.title = result.data.data.recipe.title;
-            this.ingredients = result.data.data.recipe.ingredients;   
-            console.log(this.title);
-            console.log(this.ingredients);
-                  
+            this.ingredients = result.data.data.recipe.ingredients;              
         } catch (error) {
             alert('Түр зуурын алдаа гарлаа')
         }
     }
-}
+    calcTimeCooking (){
+        const hour = Math.floor(this.cooking_time / 60)  
+        const minute = this.cooking_time - (hour * 60) 
+        this.cooking_time = `${hour} цаг ${minute} минут`;      
+    }
+    calcTime(){
+        // Найрлага бүрт ойролцоогоор 5 минут зарцуулна
+        this.time = this.ingredients.length * 5; 
+    }
+    calcHuniiToo(){
+        // Хүний тоо
+        this.huniiToo = 4;
+    }
+ }
 

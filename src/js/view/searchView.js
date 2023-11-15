@@ -1,5 +1,4 @@
 import {elements} from "./base";
-import { renderLoader } from "./base";
 
 // Вебээс хайлтын түлхүүр үгийг гаргаж авна
 export const getInput = () => elements.searchField.value;
@@ -12,7 +11,7 @@ export const clearSearchQuery = () => {
 // Хайлтын үр дүнгийн талбарыг цэвэрлэнэ
 export const clearSearchResult = () => {
     elements.searchResultsList.innerHTML = '';
-    elements.pageButton.innerHTML = '';
+    elements.pageButtons.innerHTML = '';
 }
 
 // private function
@@ -20,7 +19,7 @@ const renderRecipe = (recipe) => {
     let markup = 
     `<div class='delete__resultsList'>
     <li>
-        <a class="results__link" href="${recipe.id}">
+        <a class="results__link" href="#${recipe.id}">
             <figure class="results__fig">
                 <img src="${recipe.image_url}" alt="Test">
             </figure>
@@ -69,6 +68,6 @@ const renderButtons = (currentPage, totalPages) => {
     } else  if (currentPage === totalPages){
         buttonHtml = createButton((currentPage - 1), 'prev', 'left');
     }
-    elements.pageButton.insertAdjacentHTML('afterbegin', buttonHtml);
+    elements.pageButtons.insertAdjacentHTML('afterbegin', buttonHtml);
 }
 
